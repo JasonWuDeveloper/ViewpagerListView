@@ -10,10 +10,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.learn.viewpagerlistview.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    val list = mutableListOf<String>("預設")
+    private val list = mutableListOf("預設")
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewPager2: ViewPager2
-    private lateinit var tabLayout: TabLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -21,12 +20,9 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = MyFragmentPagerAdapter(this, list)
         binding.viewpager2.adapter = adapter
-//       binding.viewpager.adapter = object : FragmentStateAdapter(this) {
-//            override fun getItemCount(): Int {
-//                return 3
-//            }
+
         binding.add.setOnClickListener {
-            list.add("add")
+            list.add(list.size.toString())
             adapter.notifyDataSetChanged()
         }
 
@@ -36,20 +32,9 @@ class MainActivity : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
             }
         }
-//            override fun createFragment(position: Int): Fragment {
-//                return when(position) {
-//                    0 -> ScaleFragment()
-//
-//                    1 -> RotateFragment()
-//
-//                    else -> TranslateFragment()
-//                }
 
         TabLayoutMediator(binding.tabs, binding.viewpager2) { tab, position ->
-            when (position) {
-                0 -> tab.text = list[0]
-
-            }
+            tab.text = position.toString()
         }.attach()
 
     }
