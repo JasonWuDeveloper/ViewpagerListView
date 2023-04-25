@@ -3,14 +3,13 @@ package com.learn.viewpagerlistview
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.learn.viewpagerlistview.adapter.MyFragmentPagerAdapter
+import com.learn.viewpagerlistview.ui.task.buildNewList.BuildNewListFragment
 import com.learn.viewpagerlistview.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private val list = mutableListOf("預設")
+     private val listTitle = mutableListOf("預設")
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,17 +17,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adapter = MyFragmentPagerAdapter(this, list)
+        val adapter = MyFragmentPagerAdapter(this, listTitle)
         binding.viewpager2.adapter = adapter
-
+        binding.btnBuildNewList.setOnClickListener {
+            changePage(BuildNewListFragment.Instance())
+        }
         binding.add.setOnClickListener {
-            list.add(list.size.toString())
+            listTitle.add(listTitle.size.toString())
             adapter.notifyDataSetChanged()
         }
 
         binding.delete.setOnClickListener {
-            if (list.size > 1) {
-                list.removeAt(list.size - 1)
+            if (listTitle.size > 1) {
+                listTitle.removeAt(listTitle.size - 1)
                 adapter.notifyDataSetChanged()
             }
         }
@@ -37,6 +38,13 @@ class MainActivity : AppCompatActivity() {
             tab.text = position.toString()
         }.attach()
 
+    }
+
+    fun changePage(fragment : Fragment){
+        supportFragmentManager.beginTransaction()
+            .replace(com.google.android.material.R.id.container, fragment, fragment::class.simpleName)
+            .addToBackStack(fragment::class.simpleName)
+            .commit()
     }
 }
 
