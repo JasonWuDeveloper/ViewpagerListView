@@ -1,4 +1,4 @@
-package com.learn.viewpagerlistview.ui.task.buildNewList
+package com.learn.viewpagerlistview.ui.buildNewList
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -32,7 +32,7 @@ class BuildNewListFragment : Fragment() {
         }
     }
 
-    fun newInstance(s: String): BuildNewListFragment {
+    private fun newInstance(s: String): BuildNewListFragment {
         val fragment = BuildNewListFragment()
         val bundle = Bundle()
         bundle.putString("content", s)

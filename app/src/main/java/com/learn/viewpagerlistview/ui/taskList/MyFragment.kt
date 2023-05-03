@@ -1,4 +1,4 @@
-package com.learn.viewpagerlistview.ui.task
+package com.learn.viewpagerlistview.ui.taskList
 
 import android.os.Bundle
 import android.view.LayoutInflater

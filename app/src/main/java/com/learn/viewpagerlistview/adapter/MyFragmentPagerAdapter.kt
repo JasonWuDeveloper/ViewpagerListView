@@ -3,9 +3,9 @@ package com.learn.viewpagerlistview.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.learn.viewpagerlistview.ui.task.MyFragment
+import com.learn.viewpagerlistview.ui.taskList.MyFragment
 
-class MyFragmentPagerAdapter(fm: FragmentActivity, private val list: List<String>): FragmentStateAdapter(fm) {
+class MyFragmentPagerAdapter(fragment: Fragment, private val list: List<String>): FragmentStateAdapter(fragment) {
 
 
     override fun getItemCount(): Int {
